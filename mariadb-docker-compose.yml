@@ -1,0 +1,25 @@
+version: '1.0'
+
+services:
+  mariadb:
+    image: mariadb:11.6.1-ubi9-rc
+    container_name: mariadb_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fw_settings  # Optional: Creates a database at startup
+#      MYSQL_USER: root  # Optional: Creates a non-root user
+#      MYSQL_PASSWORD: root  # Optional: The non-root user password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - mariadb_network
+
+volumes:
+  mariadb_data:
+    driver: local
+
+networks:
+  mariadb_network:
+    driver: bridge
