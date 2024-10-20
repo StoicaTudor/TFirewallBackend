@@ -11,7 +11,7 @@ public class CreateLogsTable : Migration
             .WithColumn(TablesAccessors.LogsTable.Id).AsString().PrimaryKey()
             .WithColumn(TablesAccessors.LogsTable.UserProfileId).AsString().ForeignKey()
             .WithColumn(TablesAccessors.LogsTable.Severity).AsInt32().NotNullable()
-            .WithColumn(TablesAccessors.LogsTable.Message).AsString().NotNullable()
+            .WithColumn(TablesAccessors.LogsTable.Message).AsCustom("TEXT").NotNullable()
             .WithColumn(TablesAccessors.LogsTable.Timestamp).AsString().NotNullable();
         
         Create.ForeignKey(TablesAccessors.ForeignKeys.LogsToUsersProfilesForeignKey)

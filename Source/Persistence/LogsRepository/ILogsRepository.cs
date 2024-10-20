@@ -6,5 +6,5 @@ public interface ILogsRepository
 {
     Task CreateLog(FirewallLog firewallLog);
     Task<IEnumerable<FirewallLog>> GetAllLogsOfUserProfile(UserProfile userProfile);
-    Task<IEnumerable<FirewallLog>> GetAllLogs();
+    Task<IEnumerable<FirewallLog>> GetAllLogsAsync();
 }

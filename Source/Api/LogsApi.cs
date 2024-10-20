@@ -26,5 +26,5 @@ public class LogsApi : ControllerBase
 
     [HttpGet(ApiConstants.LogsApiConstants.GetAllLogs)]
     public async Task<IActionResult> GetAllLogs() =>
-        Ok(_mapper.Map<IEnumerable<LogFetchResponseDto>>(await _logCrudService.GetAllLogs()));
+        Ok(_mapper.Map<IEnumerable<LogFetchResponseDto>>(await _logCrudService.GetAllLogsAsync()));
 }

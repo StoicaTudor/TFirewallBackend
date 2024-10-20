@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using TFirewall.Source.FirewallCore.Settings;
 using TFirewall.Source.Util.ExtensionMethods;
 

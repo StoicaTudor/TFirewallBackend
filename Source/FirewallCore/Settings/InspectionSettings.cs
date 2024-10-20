@@ -4,5 +4,5 @@ namespace TFirewall.Source.FirewallCore.Settings;
 
 public abstract class InspectionSettings
 {
-    [JsonPropertyName("is_on")] public bool IsOn { get; set; } = false;
+    [JsonPropertyName(JsonProperties.IsOn)] public bool IsOn { get; set; } = false;
 }

@@ -15,8 +15,8 @@ public class LogCrudService(ILogsRepository logRepository) : ILogCrudService
         return await logRepository.GetAllLogsOfUserProfile(userProfile);
     }
 
-    public async Task<IEnumerable<UserAppConfig.Entities.FirewallLog>> GetAllLogs()
+    public async Task<IEnumerable<UserAppConfig.Entities.FirewallLog>> GetAllLogsAsync()
     {
-        return await logRepository.GetAllLogs();
+        return await logRepository.GetAllLogsAsync();
     }
 }

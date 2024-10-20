@@ -3,7 +3,9 @@ using TFirewall.Source.FirewallCore.Inspections;
 using TFirewall.Source.FirewallCore.Inspections.PanMethodInspections.EndpointTraversal;
 using TFirewall.Source.FirewallCore.Inspections.PanMethodInspections.GeoBlocking;
 using TFirewall.Source.FirewallCore.Inspections.PanMethodInspections.PortDiscovery;
+using TFirewall.Source.FirewallCore.Services;
 using TFirewall.Source.FirewallCore.Settings;
+using TFirewall.Source.Mappers;
 using TFirewall.Source.Mappers.User;
 using TFirewall.Source.Middleware;
 using TFirewall.Source.Persistence;
@@ -12,6 +14,7 @@ using TFirewall.Source.Persistence.UserRepository;
 using TFirewall.Source.RequestForwarding;
 using TFirewall.Source.Service.FirewallLog.LogCrudService;
 using TFirewall.Source.Service.User.UserCrudService;
+using TFirewall.Source.UserAppConfig.AppState;
 using Unity;
 using Unity.Injection;
 
@@ -40,7 +43,11 @@ public static class IocConfig
     private static void RegisterMappers()
     {
         Container.RegisterType<IMapper, Mapper>(
-            new InjectionConstructor(new MapperConfiguration(cfg => { cfg.AddProfile(new UserMapProfile()); }))
+            new InjectionConstructor(new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new UserMapProfile());
+                cfg.AddProfile(new LogsMapProfile());
+            }))
         );
     }
 
@@ -55,6 +62,8 @@ public static class IocConfig
         Container.RegisterType<IRequestForwarder, RequestForwarder>();
         Container.RegisterType<IUserCrudService, UserCrudService>();
         Container.RegisterType<ILogCrudService, LogCrudService>();
+        Container.RegisterType<IAppState, InMemoryAppState>();
+        Container.RegisterType<IJsonValidator, JsonValidator>();
     }
 
     private static void RegisterMiddleware()

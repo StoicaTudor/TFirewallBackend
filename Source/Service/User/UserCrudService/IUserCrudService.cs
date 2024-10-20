@@ -4,8 +4,11 @@ namespace TFirewall.Source.Service.User.UserCrudService;
 
 public interface IUserCrudService
 {
-    Task CreateUserProfile(UserProfile userProfile);
+    Task<UserProfile> CreateUserProfile(UserProfile userProfile);
+    Task<UserProfile> UpdateUserProfile(UserProfile userProfile);
+    Task DeleteUserProfileAsync(string profileId);
+    Task<UserProfile> GetUserProfile(string userProfileId);
     Task CreateUser(UserAppConfig.Entities.User dto);
     Task DeleteAllUsers();
-    Task<IEnumerable<UserAppConfig.Entities.User>> GetAllUsers();
+    Task<IEnumerable<UserAppConfig.Entities.User>> GetAllUsersAsync();
 }

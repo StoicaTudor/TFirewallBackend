@@ -15,6 +15,10 @@ public class UserMapProfile : Profile
             .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.Parse<UserRole>(src.Role)));
 
         CreateMap<UserProfile, UserProfileCreationDto>().ReverseMap();
+        CreateMap<UserProfile, UserProfileEditDto>().ReverseMap();
+        CreateMap<UserProfile, UserProfileFetchDto>().ReverseMap();
+        CreateMap<UserProfile, UserProfileUpdateResponseDto>().ReverseMap();
+        CreateMap<UserProfile, UserProfileCreationResponseDto>().ReverseMap();
         CreateMap<UserAppConfig.Entities.User, UserFetchResponseDto>().ReverseMap();
     }
 }

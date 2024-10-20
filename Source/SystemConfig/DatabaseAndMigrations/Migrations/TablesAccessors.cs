@@ -36,6 +36,7 @@ public class TablesAccessors
         public static readonly string TableName = "UserProfiles";
         public static readonly string Id = TablesAccessors.Id;
         public static readonly string UserId = "UserId";
-        public static readonly string Content = "Content";
+        public static readonly string Content = "Message";
+        public static readonly string IsActiveProfile = "IsActiveProfile";
     }
 }

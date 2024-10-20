@@ -6,5 +6,5 @@ public interface ILogCrudService
 {
     Task CreateLog(UserAppConfig.Entities.FirewallLog firewallLog);
     Task<IEnumerable<UserAppConfig.Entities.FirewallLog>> GetAllLogsOfUserProfile(UserProfile userProfile);
-    Task<IEnumerable<UserAppConfig.Entities.FirewallLog>> GetAllLogs();
+    Task<IEnumerable<UserAppConfig.Entities.FirewallLog>> GetAllLogsAsync();
 }

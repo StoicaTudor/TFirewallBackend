@@ -10,7 +10,8 @@ public class CreateUserProfilesTable : Migration
         Create.Table(TablesAccessors.UsersProfilesTable.TableName)
             .WithColumn(TablesAccessors.UsersProfilesTable.Id).AsString().PrimaryKey()
             .WithColumn(TablesAccessors.UsersProfilesTable.UserId).AsString().ForeignKey()
-            .WithColumn(TablesAccessors.UsersProfilesTable.Content).AsString().NotNullable();
+            .WithColumn(TablesAccessors.UsersProfilesTable.Content).AsCustom("TEXT").NotNullable()
+            .WithColumn(TablesAccessors.UsersProfilesTable.IsActiveProfile).AsBoolean().NotNullable();
         
         Create.ForeignKey(TablesAccessors.ForeignKeys.UsersToUsersProfilesForeignKey)
             .FromTable(TablesAccessors.UsersProfilesTable.TableName)

@@ -3,6 +3,7 @@ using TFirewall.Source.FirewallCore.Inspections.PanMethodInspections.GeoBlocking
 using TFirewall.Source.FirewallCore.Inspections.PanMethodInspections.PortDiscovery;
 using TFirewall.Source.FirewallCore.Settings;
 using TFirewall.Source.SystemConfig;
+using TFirewall.Source.UserAppConfig.AppState;
 using Unity;
 
 namespace TFirewall.Source.FirewallCore.Inspections
@@ -13,7 +14,10 @@ namespace TFirewall.Source.FirewallCore.Inspections
 
         private Func<HttpContext, bool> EndpointTraversalSupplier() => context
             => _container.Resolve<EndpointTraversalInspection>()
-                .InspectionIsCompliant(context, _container.Resolve<EndpointTraversalInspectionSettings>());
+                .InspectionIsCompliant(
+                    context,
+                    _container.Resolve<IAppState>().GetActiveInspectionSettings().EndpointTraversalSettings
+                    );
 
         public List<Func<HttpContext, bool>> PanRequestMethodInspectionTypes() =>
         [

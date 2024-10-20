@@ -1,8 +1,9 @@
 ﻿namespace TFirewall.Source.Dtos.User;
 
-public record UserProfileCreationDto(
+public record UserProfileEditDto(
     bool IsActiveProfile,
     string Name,
-    string UserId,
-    string Content
+    string Id,
+    string Content,
+    string UserId
 );
