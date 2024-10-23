@@ -1,9 +1,11 @@
-﻿using TFirewall.Source.FirewallCore.Settings;
+﻿using System.Text.Json;
+using TFirewall.Source.FirewallCore.Services;
+using TFirewall.Source.FirewallCore.Settings;
 using TFirewall.Source.UserAppConfig.Entities;
 
 namespace TFirewall.Source.UserAppConfig.AppState;
 
-public class InMemoryAppState : IAppState
+public class InMemoryAppState(IJsonValidator jsonValidator) : IAppState
 {
     private UserProfile _activeUserProfile = new()
     {
@@ -23,5 +25,10 @@ public class InMemoryAppState : IAppState
     public void SetActiveUserProfile(UserProfile userProfile)
     {
         _activeUserProfile = userProfile;
+        SetActiveInspectionSettings(
+            jsonValidator.IsValid(userProfile.Content)
+                ? JsonSerializer.Deserialize<CompositeInspectionSettings>(userProfile.Content) ?? new()
+                : new()
+        );
     }
 }

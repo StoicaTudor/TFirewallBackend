@@ -14,12 +14,14 @@ public class GeoBlockingInspection : IInspection<GeoBlockingInspectionSettings>
     private static bool RequestDoesOriginateFromAllowedCountries(
         HttpContext context,
         GeoBlockingInspectionSettings settings
-    ) => settings.AllowedCountriesCodes.Contains(GetUserCountryByIp("mock"));
+    // ) => settings.AllowedCountriesCodes.Contains(GetUserCountryByIp("mock"));
+    ) => true;
 
     private static bool RequestDoesNotOriginateFromForbiddenCountries(
         HttpContext context,
         GeoBlockingInspectionSettings settings
-    ) => settings.ForbiddenCountriesCodes.DoesNotContain(GetUserCountryByIp("mock"));
+    // ) => settings.ForbiddenCountriesCodes.DoesNotContain(GetUserCountryByIp("mock"));
+    ) => true;
 
     private static string GetUserCountryByIp(string ip) =>
         Random.Next(1, 101).IsEven() ? CountryCodes.GetRandomCountryCode() : "CN";

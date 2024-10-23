@@ -17,7 +17,7 @@ namespace TFirewall.Source.FirewallCore.Inspections
                 .InspectionIsCompliant(
                     context,
                     _container.Resolve<IAppState>().GetActiveInspectionSettings().EndpointTraversalSettings
-                    );
+                );
 
         public List<Func<HttpContext, bool>> PanRequestMethodInspectionTypes() =>
         [
@@ -28,11 +28,17 @@ namespace TFirewall.Source.FirewallCore.Inspections
 
         private Func<HttpContext, bool> PortDiscoverySupplier() => context
             => _container.Resolve<PortDiscoveryInspection>()
-                .InspectionIsCompliant(context, _container.Resolve<PortDiscoveryInspectionSettings>());
+                .InspectionIsCompliant(
+                    context,
+                    _container.Resolve<IAppState>().GetActiveInspectionSettings().PortDiscoverySettings
+                    );
 
         private Func<HttpContext, bool> GeoRestrictionSupplier() => context
             => _container.Resolve<GeoBlockingInspection>()
-                .InspectionIsCompliant(context, _container.Resolve<GeoBlockingInspectionSettings>());
+                .InspectionIsCompliant(
+                    context,
+                    _container.Resolve<IAppState>().GetActiveInspectionSettings().GeoBlockingSettings
+                    );
 
         public List<Func<HttpContext, bool>> GetRequestMethodInspectionTypes() =>
         [

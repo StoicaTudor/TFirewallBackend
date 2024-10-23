@@ -8,6 +8,7 @@ public interface IUserRepository
     Task UpdateUserProfileAsync(UserProfile userProfile);
     Task CreateUser(User user);
     Task DeleteAllUser();
+    Task<UserProfile> GetActiveUserProfileAsync();
     Task<IEnumerable<User>> GetAllUsers();
     void SetAllUserProfilesToInactive();
     Task DeleteUserProfileAsync(string profileId);

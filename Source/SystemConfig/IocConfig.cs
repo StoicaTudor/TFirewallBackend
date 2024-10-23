@@ -62,7 +62,7 @@ public static class IocConfig
         Container.RegisterType<IRequestForwarder, RequestForwarder>();
         Container.RegisterType<IUserCrudService, UserCrudService>();
         Container.RegisterType<ILogCrudService, LogCrudService>();
-        Container.RegisterType<IAppState, InMemoryAppState>();
+        Container.RegisterSingleton<IAppState, InMemoryAppState>();
         Container.RegisterType<IJsonValidator, JsonValidator>();
     }
 

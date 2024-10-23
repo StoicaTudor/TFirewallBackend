@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public class DeleteRequestInspectorMiddleware
 {
-    public bool RequestPasses(HttpContext context) => IsMalicious(context.Request);
+    public bool RequestPasses(HttpContext context) => IsNotMalicious(context.Request);
 
 
     private bool IsMalicious(HttpRequest request)
@@ -13,4 +13,6 @@ public class DeleteRequestInspectorMiddleware
         // Add your inspection logic here
         return false; // Example placeholder
     }
+    
+    private bool IsNotMalicious(HttpRequest request) => !IsMalicious(request);
 }

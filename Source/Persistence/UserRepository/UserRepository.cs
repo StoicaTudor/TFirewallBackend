@@ -122,4 +122,18 @@ public class UserRepository(DbContext dbContext) : IUserRepository
                              """;
         connection.Execute(query);
     }
+
+    public async Task<UserProfile> GetActiveUserProfileAsync()
+    {
+        using IDbConnection connection = dbContext.CreateConnection();
+
+        const string query =
+            """
+                        SELECT *
+                         FROM UserProfiles 
+                         WHERE IsActiveProfile = true;
+            """;
+
+        return (await connection.QueryAsync<UserProfile>(query)).First();
+    }
 }

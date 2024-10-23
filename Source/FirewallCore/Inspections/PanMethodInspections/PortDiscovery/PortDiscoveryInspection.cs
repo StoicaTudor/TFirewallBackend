@@ -13,7 +13,8 @@ public class PortDiscoveryInspection : IInspection<PortDiscoveryInspectionSettin
         if (!port.HasValue)
             return false;
 
-        return inspectionSettings.AllowedPorts.Contains(port.Value);
+        // return inspectionSettings.AllowedPorts.Contains(port.Value);
+        return true;
     }
 
     private static bool IsNotForbiddenPort(HttpContext context, PortDiscoveryInspectionSettings inspectionSettings)

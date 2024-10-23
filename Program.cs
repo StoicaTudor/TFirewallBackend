@@ -1,8 +1,12 @@
 using System.Reflection;
 using FluentMigrator.Runner;
 using TFirewall.Source.Middleware;
+using TFirewall.Source.Service.User.UserCrudService;
 using TFirewall.Source.SystemConfig;
 using TFirewall.Source.SystemConfig.DatabaseAndMigrations;
+using TFirewall.Source.UserAppConfig.AppState;
+using TFirewall.Source.UserAppConfig.Entities;
+using Unity;
 using Constants = TFirewall.Source.Util.Constants;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -34,9 +38,16 @@ builder.Services.AddCors(options =>
 
 IocConfig.RegisterComponents(builder.Configuration);
 
+IUnityContainer container = IocConfig.GetConfiguredContainer();
+UserProfile userProfile = await container.Resolve<IUserCrudService>().GetActiveUserProfileAsync();
+container.Resolve<IAppState>().SetActiveUserProfile(userProfile);
+
 WebApplication app = builder.Build();
 
-// app.UseMiddleware<RequestInspectorMiddleware>().UseMiddleware<LoggingMiddleware>();
+app.UseMiddleware<RequestInspectorMiddleware>()
+    .UseMiddleware<LoggingMiddleware>()
+    .UseMiddleware<RequestForwarderMiddleware>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

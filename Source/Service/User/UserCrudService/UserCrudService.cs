@@ -41,7 +41,7 @@ public class UserCrudService(
                     Timestamp = DateTime.UtcNow,
                     Severity = LogSeverity.Warning,
                     Message =
-                        $"Active Profile has supposed to be changed, but the content is invalid - {userProfile.Name} - {userProfile.Content}."
+                        $"Active Profile was supposed to be changed, but the content is invalid - {userProfile.Name} - {userProfile.Content}."
                 }
                 : new UserAppConfig.Entities.FirewallLog
                 {
@@ -85,5 +85,10 @@ public class UserCrudService(
     public Task<UserProfile> GetUserProfile(string userProfileId)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<UserProfile> GetActiveUserProfileAsync()
+    {
+        return await userRepository.GetActiveUserProfileAsync();
     }
 }
